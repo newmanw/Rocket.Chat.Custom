@@ -20,36 +20,29 @@ jobs:
         cd ..
         pwd
         ls
-      env:
-        CI: true    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - name: install deps
       run: |
+        pwd
+        ls
         npm install
-      env:
-        CI: true
+    - name: LS
+      run: |
+        pwd
+        ls
     - name: clone rocket.chat
       uses: actions/checkout@master
       with:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: ..
-    - name: LS
-      run: |
-        ls
-      env:
-        CI: true
     - name: merge styles
       run: |
         npm run merge
-      env:
-        CI: true
     - name: build APK
       run: |
         cd Rocket.Chat.ReactNative
         yarn
         npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
-      env:
-        CI: true
