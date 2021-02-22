@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        path: ../Rocket.Chat.Custom
+        path: ./Rocket.Chat.Custom
     - name: LS
       run: |
         cd ..
