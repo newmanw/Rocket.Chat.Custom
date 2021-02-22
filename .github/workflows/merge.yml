@@ -17,6 +17,9 @@ jobs:
       run: |
         pwd
         ls
+        cd ..
+        pwd
+        ls
       env:
         CI: true    
     - name: Use Node.js ${{ matrix.node-version }}
