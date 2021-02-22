@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/newmanw/Rocket.Chat.Custom.git"
   },
+  "scripts": {
+    "merge": "node merge.js"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/newmanw/Rocket.Chat.Custom/issues"
