@@ -13,6 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        path: ../Rocket.Chat.Custom
+    - name: LS
+      run: |
+        ls
+      env:
+        CI: true    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
