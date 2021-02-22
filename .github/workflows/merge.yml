@@ -26,6 +26,7 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: RocketChat/Rocket.Chat.ReactNative
+        path: ../Rocket.Chat.ReactNative
     - name: LS
       run: |
         ls
