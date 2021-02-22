@@ -1,0 +1,8 @@
+{
+  "name": "RocketChatRN",
+  "share": "ShareRocketChatRN",
+  "displayName": "RocketChatRN",
+  "server": "https://rocketchat.gs.mil",
+  "appGroup": "mil.nga.coms",
+  "appStoreID": "9999"
+}
