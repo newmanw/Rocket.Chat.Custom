@@ -23,8 +23,14 @@ jobs:
       env:
         CI: true
     - name: clone rocket.chat
+      uses: actions/checkout@master
+      with:
+        repository: RocketChat/Rocket.Chat.ReactNative
+    - name: LS
       run: |
-        git clone https://github.com/RocketChat/Rocket.Chat.ReactNative.git ..
+        ls
+      env:
+        CI: true
     - name: merge styles
       run: |
         npm run merge
