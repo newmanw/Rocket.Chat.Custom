@@ -22,6 +22,9 @@ jobs:
         npm install
       env:
         CI: true
+    - name: clone rocket.chat
+      run: |
+        git clone https://github.com/RocketChat/Rocket.Chat.ReactNative.git ..
     - name: merge styles
       run: |
         npm run merge
@@ -29,8 +32,6 @@ jobs:
         CI: true
     - name: build APK
       run: |
-        cd ..
-        git clone https://github.com/RocketChat/Rocket.Chat.ReactNative.git
         cd Rocket.Chat.ReactNative
         yarn
         npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
