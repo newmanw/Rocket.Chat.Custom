@@ -17,6 +17,7 @@ jobs:
         path: ../Rocket.Chat.Custom
     - name: LS
       run: |
+        cd ..
         ls
       env:
         CI: true    
