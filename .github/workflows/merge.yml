@@ -1,0 +1,38 @@
+name: merge
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: install deps
+      run: |
+        npm install
+      env:
+        CI: true
+    - name: merge styles
+      run: |
+        npm run merge
+      env:
+        CI: true
+    - name: build APK
+      run: |
+        cd ..
+        git clone https://github.com/RocketChat/Rocket.Chat.ReactNative.git
+        cd Rocket.Chat.ReactNative
+        yarn
+        npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+      env:
+        CI: true
