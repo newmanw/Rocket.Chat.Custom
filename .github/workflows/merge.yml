@@ -13,14 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: Rocket.Chat.Custom/Rocket.Chat.Custom
     - name: LS
       run: |
         pwd
-        cd ..
         ls
-        pwd
       env:
         CI: true    
     - name: Use Node.js ${{ matrix.node-version }}
