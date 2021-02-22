@@ -1,6 +1,5 @@
 # Rocket.Chat.Custom
 
-
 ## RocketChat build
 
 $ yarn
@@ -10,7 +9,3 @@ $ ./gradlew assembleOfficialFossRelease
 
 ## APK
 app/build/outputs/apk/officialFoss/release/app-official-foss-release.apk
-
-## TODO ic_notication, need to create all icons, throw in dir, and then copy over at build time
-
-## TODO app.json, set server, app group, and store id
