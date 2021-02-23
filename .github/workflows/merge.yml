@@ -32,8 +32,9 @@ jobs:
         cd Rocket.Chat.ReactNative.Repo
         pwd
         echo ---------------
+        cd ..
         ls
-        npm run merge Rocket.Chat.ReactNative.Repo
+        npm run merge ./Rocket.Chat.ReactNative.Repo
     - name: build APK
       run: |
         cd Rocket.Chat.ReactNative
