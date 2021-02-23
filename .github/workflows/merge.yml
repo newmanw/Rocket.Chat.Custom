@@ -35,6 +35,7 @@ jobs:
     - name: Build and Sign APK
       uses: eskatos/gradle-command-action@v1
       with:
+        wrapper-directory: Rocket.Chat.ReactNative.Repo/android
         build-root-directory: Rocket.Chat.ReactNative.Repo/android
         arguments: assembleOfficialFossRelease
           -PKEYSTORE=${{ secrets.KEYSTORE }}
