@@ -27,7 +27,7 @@ jobs:
         path: 'Rocket.Chat.ReactNative.Repo'
     - name: merge styles
       run: |
-        npm run merge
+        npm run merge Rocket.Chat.ReactNative.Repo
     - name: build APK
       run: |
         cd Rocket.Chat.ReactNative
