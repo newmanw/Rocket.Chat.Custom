@@ -31,17 +31,21 @@ jobs:
         path: 'Rocket.Chat.ReactNative.Repo'
     - name: merge styles
       run: |
-        pwd
-        echo --------------
-        ls Rocket.Chat.ReactNative.Repo
-        echo ---------------
-        cat Rocket.Chat.ReactNative.Repo/app.json
-        ls
         npm run merge ./Rocket.Chat.ReactNative.Repo
-    - name: build APK
+    - name: React Native Bundle
       run: |
         cd Rocket.Chat.ReactNative.Repo
-        yarn
-        npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
-        cd android
-        ./gradlew assembleOfficialFossRelease
+        yarn && npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+    - name: Build and Sign APK
+      uses: eskatos/gradle-command-action@v1
+      with:
+        arguments: assembleOfficialFossRelease
+          -PKEYSTORE=${{ secrets.KEYSTORE }}
+          -PKEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
+          -PKEYSTORE_ALIAS=${{ secrets.KEY_ALIAS }}
+          -PKEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
+        wrapper-cache-enabled: true
+        dependencies-cache-enabled: true
+        configuration-cache-enabled: true
+        wrapper-directory: Rocket.Chat.ReactNative.Repo/android
+        
