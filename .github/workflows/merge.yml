@@ -40,6 +40,6 @@ jobs:
         npm run merge ./Rocket.Chat.ReactNative.Repo
     - name: build APK
       run: |
-        cd Rocket.Chat.ReactNative
+        cd Rocket.Chat.ReactNative.Repo
         yarn
         npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
