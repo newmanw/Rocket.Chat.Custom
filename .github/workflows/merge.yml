@@ -47,5 +47,5 @@ jobs:
         wrapper-cache-enabled: true
         dependencies-cache-enabled: true
         configuration-cache-enabled: true
-        wrapper-directory: Rocket.Chat.ReactNative.Repo/android
+        build-root-directory: Rocket.Chat.ReactNative.Repo/android
         
