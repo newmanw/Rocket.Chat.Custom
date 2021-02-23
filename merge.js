@@ -4,7 +4,7 @@ const path = require('path');
 appPath = process.argv.slice(2)[0];
 
 // app.json
-const appJsonPath = `${appPath}${path.delimiter}app.json`
+const appJsonPath = `${appPath}${path.sep}app.json`
 // const appJsonPath = path.join(appPath, 'app.json');
 
 const appJson = require(appJsonPath);
