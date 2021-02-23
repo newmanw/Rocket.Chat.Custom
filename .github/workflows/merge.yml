@@ -28,6 +28,10 @@ jobs:
     - name: merge styles
       run: |
         pwd
+        echo --------------
+        cd Rocket.Chat.ReactNative.Repo
+        pwd
+        echo ---------------
         ls
         npm run merge Rocket.Chat.ReactNative.Repo
     - name: build APK
