@@ -1,8 +1,7 @@
-const { exception } = require('console');
 const fs = require('fs-extra');
 const path = require('path');
 
-const appPath = '../Rocket.Chat.ReactNative';
+appPath = process.argv.slice(2)[0];
 
 // app.json
 const appJsonPath = path.join(appPath, 'app.json');

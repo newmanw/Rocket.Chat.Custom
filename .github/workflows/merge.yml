@@ -13,35 +13,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: LS
-      run: |
-        pwd
-        ls
-        cd ..
-        pwd
-        ls
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: install deps
+    - name: Install Dependencies
       run: |
-        pwd
-        ls
         npm install
-    - name: LS
-      run: |
-        pwd
-        ls
-    - name: clone rocket.chat
+    - name: Clone Rocket.Chat.ReactNative
       uses: actions/checkout@master
       with:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: 'Rocket.Chat.ReactNative.Repo'
-    - name: LS
-      run: |
-        pwd
-        ls
     - name: merge styles
       run: |
         npm run merge
