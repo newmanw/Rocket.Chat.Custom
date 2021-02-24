@@ -17,7 +17,6 @@ jobs:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: 'Rocket.Chat.ReactNative.Repo'
     - name: Check Release
-      id: version
       if: $(git tag --sort=committerdate | tail -1) == "0.0"
       run: |
         exit 1
@@ -25,6 +24,9 @@ jobs:
     - name: Set version
       id: version
       run: |
+        echo ------
+        echo ${{LAST_VERSION}}
+        echo ------
         echo "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: List Release
