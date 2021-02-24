@@ -12,6 +12,7 @@ jobs:
     - name: Set Latest Release
       id: latest_version
       run: |
+        git fetch --tags
         echo ::set-output name=version::$(git tag --sort=committerdate | tail -1)
     - name: Clone Rocket.Chat.ReactNative
       uses: actions/checkout@master
@@ -21,19 +22,13 @@ jobs:
     - name: Set Current Release
       id: current_version
       run: |
-        git log
         git fetch --tags
-        echo get RC version
-        OUTPUT=$(git tag --sort=committerdate | tail -1)
-        echo $OUTPUT
         echo ::set-output name=version::$(git tag --sort=committerdate | tail -1)
       working-directory: Rocket.Chat.ReactNative.Repo
-    - name: List Release
+    - name: List Releases
       run: |
-        echo latest release
-        echo ${{steps.latest_version.outputs.version}}
-        echo current release
-        echo ${{steps.current_version.outputs.version}}
+        echo latest release: ${{steps.latest_version.outputs.version}}
+        echo current release: ${{steps.current_version.outputs.version}}
     - name: Check Release
       if: ${{steps.latest_version.outputs.version}}} == ${{steps.current_version.outputs.version}}
       run: |
