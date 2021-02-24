@@ -12,7 +12,7 @@ jobs:
     - name: Set Latest Release
       id: latest_version
       run: |
-        "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
+        "::set-output name=version::purple"
     - name: Clone Rocket.Chat.ReactNative
       uses: actions/checkout@master
       with:
@@ -21,7 +21,7 @@ jobs:
     - name: Set Current Release
       id: current_version
       run: |
-        "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
+        "::set-output name=version::green"
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: Check Release
       if: ${{steps.latest_version.outputs.version}}} == ${{steps.current_version.outputs.version}}
