@@ -32,7 +32,7 @@ jobs:
     - name: Check Release
       if: steps.latest_version.outputs.version == steps.current_version.outputs.version
       run: |
-        exit 0
+        exit 1
     # - name: Use Node.js
     #   uses: actions/setup-node@v1
     #   with:
