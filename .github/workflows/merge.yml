@@ -23,7 +23,8 @@ jobs:
       run: |
         git log
         echo get RC version
-        git tag --sort=committerdate
+        OUTPUT=$(git tag --sort=committerdate | tail -1)
+        echo $OUTPUT
         echo ::set-output name=version::$(git tag --sort=committerdate | tail -1)
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: List Release
