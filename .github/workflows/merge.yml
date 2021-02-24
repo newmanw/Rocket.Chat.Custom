@@ -12,7 +12,7 @@ jobs:
     - name: Set Latest Release
       id: latest_version
       run: |
-        "echo ::set-output name=version::purple"
+        echo ::set-output name=version::purple
     - name: Clone Rocket.Chat.ReactNative
       uses: actions/checkout@master
       with:
