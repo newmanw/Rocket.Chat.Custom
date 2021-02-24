@@ -7,27 +7,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      LAST_VERSION: $(cat last-release.txt)
-
     steps:
+    - name: Current Release
+      id: latest_version
+      run: |
+        "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
     - name: Clone Rocket.Chat.ReactNative
+      id: current_version
       uses: actions/checkout@master
       with:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: 'Rocket.Chat.ReactNative.Repo'
+      run: |
+        "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
     - name: Check Release
-      if: $(git tag --sort=committerdate | tail -1) == '0.0'
+      if: ${{steps.latest_version.outputs.version}}} == ${{steps.current_version.outputs.version}}
       run: |
         exit 1
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: Set version
-      id: version
+      id: current_version
       run: |
         echo ------
         echo ${{env.LAST_VERSION}}
         echo ------
-        echo "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
+        "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: List Release
       run: |
