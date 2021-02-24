@@ -26,17 +26,9 @@ jobs:
       if: ${{steps.latest_version.outputs.version}}} == ${{steps.current_version.outputs.version}}
       run: |
         exit 1
-    - name: Set version
-      id: current_version
-      run: |
-        echo ------
-        echo ${{env.LAST_VERSION}}
-        echo ------
-        "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
-      working-directory: Rocket.Chat.ReactNative.Repo
     - name: List Release
       run: |
-        echo ${{steps.version.outputs.version}}
+        echo ${{steps.current_version.outputs.version}}
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v1
