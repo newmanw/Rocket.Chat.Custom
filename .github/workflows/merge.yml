@@ -63,15 +63,20 @@ jobs:
         npm run merge ./Rocket.Chat.ReactNative.Repo
     - name: React Native Bundle
       run: |
-        cd Rocket.Chat.ReactNative.Repo
         yarn && npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+      working-directory: Rocket.Chat.ReactNative.Repo
+    - name: Setup Keystore
+      run: |
+        echo "${{ secrets.KEYSTORE }}" > release.b64
+        base64 -d release.b64 > release.keystore
+      working-directory: Rocket.Chat.ReactNative.Repo
     - name: Build and Sign APK
       uses: eskatos/gradle-command-action@v1
       with:
         wrapper-directory: Rocket.Chat.ReactNative.Repo/android
         build-root-directory: Rocket.Chat.ReactNative.Repo/android
         arguments: assembleOfficialFossRelease
-          -PKEYSTORE=${{ secrets.KEYSTORE }}
+          -PKEYSTORE=release.keystore
           -PKEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
           -PKEY_ALIAS=${{ secrets.KEY_ALIAS }}
           -PKEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
