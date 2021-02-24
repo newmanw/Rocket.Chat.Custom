@@ -22,6 +22,7 @@ jobs:
       id: current_version
       run: |
         git log
+        git fetch --tags
         echo get RC version
         OUTPUT=$(git tag --sort=committerdate | tail -1)
         echo $OUTPUT
