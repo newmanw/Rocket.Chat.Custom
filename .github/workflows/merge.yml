@@ -17,7 +17,7 @@ jobs:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: 'Rocket.Chat.ReactNative.Repo'
     - name: Check Release
-      if: $(git tag --sort=committerdate | tail -1) == "0.0"
+      if: (git tag --sort=committerdate | tail -1) == "0.0"
       run: |
         exit 1
       working-directory: Rocket.Chat.ReactNative.Repo
