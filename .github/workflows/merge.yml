@@ -25,25 +25,30 @@ jobs:
       with:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: 'Rocket.Chat.ReactNative.Repo'
-    - name: merge styles
-      run: |
-        npm run merge ./Rocket.Chat.ReactNative.Repo
-    - name: React Native Bundle
+    # - name: merge styles
+    #   run: |
+    #     npm run merge ./Rocket.Chat.ReactNative.Repo
+    # - name: React Native Bundle
+    #   run: |
+    #     cd Rocket.Chat.ReactNative.Repo
+    #     yarn && npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+    # - name: Build and Sign APK
+    #   uses: eskatos/gradle-command-action@v1
+    #   with:
+    #     wrapper-directory: Rocket.Chat.ReactNative.Repo/android
+    #     build-root-directory: Rocket.Chat.ReactNative.Repo/android
+    #     arguments: assembleOfficialFossRelease
+    #       -PKEYSTORE=${{ secrets.KEYSTORE }}
+    #       -PKEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
+    #       -PKEY_ALIAS=${{ secrets.KEY_ALIAS }}
+    #       -PKEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
+    #     wrapper-cache-enabled: true
+    #     dependencies-cache-enabled: true
+    #     configuration-cache-enabled: true
+    - name: Create Release
       run: |
         cd Rocket.Chat.ReactNative.Repo
-        yarn && npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
-    - name: Build and Sign APK
-      uses: eskatos/gradle-command-action@v1
-      with:
-        wrapper-directory: Rocket.Chat.ReactNative.Repo/android
-        build-root-directory: Rocket.Chat.ReactNative.Repo/android
-        arguments: assembleOfficialFossRelease
-          -PKEYSTORE=${{ secrets.KEYSTORE }}
-          -PKEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
-          -PKEY_ALIAS=${{ secrets.KEY_ALIAS }}
-          -PKEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
-        wrapper-cache-enabled: true
-        dependencies-cache-enabled: true
-        configuration-cache-enabled: true
+        echo latest tag
+        echo git tag | tail -1
         
         
