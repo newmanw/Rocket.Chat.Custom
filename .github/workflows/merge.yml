@@ -6,8 +6,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
+    env:
+      LAST_VERSION: $(cat last-release.txt)
+
     steps:
+    - name: Clone Rocket.Chat.ReactNative
+      uses: actions/checkout@master
+      with:
+        repository: RocketChat/Rocket.Chat.ReactNative
+        path: 'Rocket.Chat.ReactNative.Repo'
+    - name: Check Release
+      id: version
+      if: $(git tag --sort=committerdate | tail -1) == "0.0"
+      run: |
+        exit 1
+      working-directory: Rocket.Chat.ReactNative.Repo
+    - name: Set version
+      id: version
+      run: |
+        echo "::set-output name=version::$(git tag --sort=committerdate | tail -1)"
+      working-directory: Rocket.Chat.ReactNative.Repo
+    - name: List Release
+      run: |
+        echo ${{steps.version.outputs.version}}
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v1
@@ -20,11 +42,6 @@ jobs:
     - name: Install Dependencies
       run: |
         npm install
-    - name: Clone Rocket.Chat.ReactNative
-      uses: actions/checkout@master
-      with:
-        repository: RocketChat/Rocket.Chat.ReactNative
-        path: 'Rocket.Chat.ReactNative.Repo'
     # - name: merge styles
     #   run: |
     #     npm run merge ./Rocket.Chat.ReactNative.Repo
@@ -45,10 +62,5 @@ jobs:
     #     wrapper-cache-enabled: true
     #     dependencies-cache-enabled: true
     #     configuration-cache-enabled: true
-    - name: Create Release
-      run: |
-        cd Rocket.Chat.ReactNative.Repo
-        echo latest tag
-        echo git tag | tail -1
         
         
