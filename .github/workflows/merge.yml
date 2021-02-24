@@ -25,6 +25,9 @@ jobs:
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: List Release
       run: |
+        echo latest release
+        echo ${{steps.latest_version.outputs.version}}
+        echo current release
         echo ${{steps.current_version.outputs.version}}
     - name: Check Release
       if: ${{steps.latest_version.outputs.version}}} == ${{steps.current_version.outputs.version}}
