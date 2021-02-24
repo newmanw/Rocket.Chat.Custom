@@ -78,15 +78,15 @@ jobs:
     #     wrapper-cache-enabled: true
     #     dependencies-cache-enabled: true
     #     configuration-cache-enabled: true
-    # - name: Create Release
-    #   id: create_release
-    #   uses: actions/create-release@v1
-    #   env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-    #   with:
-    #       tag_name: ${{ needs.check.outputs.current_version }}
-    #       release_name: ${{ needs.check.outputs.current_version }}
-    #       body: |
-    #         RocketChat.ReactNative Version ${{ needs.check.outputs.current_version }}
-    #       draft: false
-    #       prerelease: false 
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      with:
+          tag_name: ${{ needs.check.outputs.current_version }}
+          release_name: ${{ needs.check.outputs.current_version }}
+          body: |
+            RocketChat.ReactNative Version ${{ needs.check.outputs.current_version }}
+          draft: false
+          prerelease: false 
