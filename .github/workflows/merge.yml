@@ -97,21 +97,26 @@ jobs:
           prerelease: false
     - name: Find Artifact
       run: |
-        echo *** ls android
+        echo *** RocketChat.ReactNative.Repo/android
         cd RocketChat.ReactNative.Repo/android
         ls
-        echo *** ls app/build
+        echo ***
+        echo *** app/build
         cd app/build
         ls
-        echo *** ls outputs
+        echo ***
+        echo *** outputs
         cd outputs
         ls
-        echo *** ls apk
+        echo ***
+        echo *** apk
         cd apk
         ls
+        echo ***
         echo *** officialFoss
         cd officialFoss
         ls
+        echo ***
         echo *** release
         cd release
         ls
