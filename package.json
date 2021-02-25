@@ -7,7 +7,8 @@
     "url": "git+https://github.com/newmanw/Rocket.Chat.Custom.git"
   },
   "scripts": {
-    "merge": "node merge.js"
+    "merge": "node merge.js",
+    "ios": "scripts/ios/plist.sh"
   },
   "license": "MIT",
   "bugs": {
