@@ -95,6 +95,26 @@ jobs:
             RocketChat.ReactNative Version ${{ needs.check.outputs.current_version }}
           draft: false
           prerelease: false
+    - name: Find Artifact
+      run: |
+        echo *** ls android
+        cd RocketChat.ReactNative.Repo/android
+        ls
+        echo *** ls app/build
+        cd app/build
+        ls
+        echo *** ls outputs
+        cd outputs
+        ls
+        echo *** ls apk
+        cd apk
+        ls
+        echo *** officialFoss
+        cd officialFoss
+        ls
+        echo *** release
+        cd release
+        ls
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
