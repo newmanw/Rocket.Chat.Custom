@@ -97,8 +97,14 @@ jobs:
           prerelease: false
     - name: Find Artifact
       run: |
-        echo *** RocketChat.ReactNative.Repo/android;
-        cd RocketChat.ReactNative.Repo/android;
+        echo *** root;
+        ls;
+        echo ***
+        echo *** Rocket.Chat.ReactNative.Repo;
+        cd Rocket.Chat.ReactNative.Repo;
+        ls;
+        echo *** android;
+        cd android;
         ls;
         echo ***;
         echo *** app/build;
@@ -124,4 +130,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: app-official-foss-release
-        path: RocketChat.ReactNative.Repo/android/app/build/outputs/apk/officialFoss/release
+        path: Rocket.Chat.ReactNative.Repo/android/app/build/outputs/apk/officialFoss/release
