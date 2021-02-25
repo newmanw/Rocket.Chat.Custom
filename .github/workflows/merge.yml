@@ -35,6 +35,8 @@ jobs:
 
   ios:
    runs-on: macos-latest
+   needs: check
+   if: needs.check.outputs.latest_version != needs.check.outputs.current_version
 
    steps:
     - uses: actions/checkout@v2
