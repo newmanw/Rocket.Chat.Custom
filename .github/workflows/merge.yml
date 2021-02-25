@@ -68,7 +68,7 @@ jobs:
     - name: Setup Keystore
       run: |
         echo "${{ secrets.KEYSTORE }}" > release.b64
-        base64 -d release.b64 > release.keystore
+        base64 -d release.b64 > android/release.keystore
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: Build and Sign APK
       uses: eskatos/gradle-command-action@v1
