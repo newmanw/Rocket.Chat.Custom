@@ -127,7 +127,11 @@ jobs:
         cd release;
         ls;
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-release-asset@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: app-official-foss-release
-        path: Rocket.Chat.ReactNative.Repo/android/app/build/outputs/apk/officialFoss/release
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: Rocket.Chat.ReactNative.Repo/android/app/build/outputs/apk/officialFoss/release/app-official-foss-release.apk
+        asset_name: app-official-foss-release.apk
+        asset_content_type: application/octet-stream
