@@ -97,29 +97,29 @@ jobs:
           prerelease: false
     - name: Find Artifact
       run: |
-        echo *** RocketChat.ReactNative.Repo/android
-        cd RocketChat.ReactNative.Repo/android
-        ls
-        echo ***
-        echo *** app/build
-        cd app/build
-        ls
-        echo ***
-        echo *** outputs
-        cd outputs
-        ls
-        echo ***
-        echo *** apk
-        cd apk
-        ls
-        echo ***
-        echo *** officialFoss
-        cd officialFoss
-        ls
-        echo ***
-        echo *** release
-        cd release
-        ls
+        echo *** RocketChat.ReactNative.Repo/android;
+        cd RocketChat.ReactNative.Repo/android;
+        ls;
+        echo ***;
+        echo *** app/build;
+        cd app/build;
+        ls;
+        echo ***;
+        echo *** outputs;
+        cd outputs;
+        ls;
+        echo ***;
+        echo *** apk;
+        cd apk;
+        ls;
+        echo ***;
+        echo *** officialFoss;
+        cd officialFoss;
+        ls;
+        echo ***;
+        echo *** release;
+        cd release;
+        ls;
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
