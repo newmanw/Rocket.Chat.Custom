@@ -74,7 +74,7 @@ jobs:
       uses: eskatos/gradle-command-action@v1
       with:
         wrapper-directory: Rocket.Chat.ReactNative.Repo/android
-        build-root-directory: Rocket.Chat.ReactNative.Repo/android
+        build-root-directory: Rocket.Chat.ReactNative.Repo/android/app
         arguments: assembleOfficialFossRelease
           -PKEYSTORE=release.keystore
           -PKEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
