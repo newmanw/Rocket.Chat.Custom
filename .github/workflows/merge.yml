@@ -33,10 +33,33 @@ jobs:
         echo latest release: ${{steps.latest_version.outputs.version}}
         echo current release: ${{steps.current_version.outputs.version}}
 
+  release:
+    runs-on: ubuntu-latest
+    needs: check
+    if: needs.check.outputs.latest_version != needs.check.outputs.current_version
+    outputs:
+      release_upload_url: ${{ steps.release_upload_url.outputs.version }}
+
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      with:
+          tag_name: ${{ needs.check.outputs.current_version }}
+          release_name: ${{ needs.check.outputs.current_version }}
+          body: |
+            RocketChat.ReactNative Version ${{ needs.check.outputs.current_version }}
+          draft: false
+          prerelease: false
+    - name: Output
+      run: |
+        echo ::set-output name=release_upload_url::steps.create_release.outputs.upload_url
+
   ios:
    runs-on: macos-latest
-   needs: check
-   if: needs.check.outputs.latest_version != needs.check.outputs.current_version
+   needs: release
 
    steps:
     - uses: actions/checkout@v2
@@ -89,7 +112,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        upload_url: ${{ needs.release.outputs.release_upload_url }} 
         asset_path: Rocket.Chat.ReactNative.Repo/ios/RocketChat.xcarchive.tar.gz
         asset_name: RocketChat.xcarchive.tar.gz
         asset_content_type: application/octet-stream
