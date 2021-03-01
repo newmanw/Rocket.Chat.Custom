@@ -47,6 +47,9 @@ jobs:
         path: 'Rocket.Chat.ReactNative.Repo'
     - name: TODO TEMP - Target old release
       run: |
+        pwd
+        echo -------
+        ls
         git checkout single-server
         git checkout e6d6b83b5d32b1bd4651281b2274b48585a24859
       working-directory: Rocket.Chat.ReactNative.Repo
