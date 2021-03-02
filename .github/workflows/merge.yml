@@ -38,7 +38,7 @@ jobs:
     needs: check
     if: needs.check.outputs.latest_version != needs.check.outputs.current_version
     outputs:
-      release_upload_url: ${{ steps.create_release.outputs.release_upload_url }}
+      release_upload_url: ${{ steps.create_release.outputs.upload_url }}
 
     steps:
     - name: Create Release
@@ -56,6 +56,10 @@ jobs:
     - name: Output
       run: |
         echo ::set-output name=release_upload_url::steps.create_release.outputs.upload_url
+        echo Setting upload url
+        echo ${{ steps.create_release.outputs.upload_url }}
+        echo TO
+        echo ${{ steps.create_release.outputs.upload_url }}
 
   ios:
    runs-on: macos-latest
