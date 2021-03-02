@@ -112,14 +112,18 @@ jobs:
         echo Upload URL
         echo ${{ needs.release.outputs.release_upload_url }} 
       working-directory: Rocket.Chat.ReactNative.Repo/ios
+    - name: Bundle Artifacts
+      run: |
+         tar -czvf RocketChat.xcarchive.tar.gz RocketChat.xcarchive/
+      working-directory: Rocket.Chat.ReactNative.Repo/ios/
     - name: Upload Artifacts
       uses: actions/upload-release-asset@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.release.outputs.release_upload_url }} 
-        asset_path: Rocket.Chat.ReactNative.Repo/ios/RocketChat.xcarchive
-        asset_name: RocketChat.xcarchive
+        asset_path: Rocket.Chat.ReactNative.Repo/ios/RocketChat.xcarchive.tar.gz
+        asset_name: RocketChat.xcarchive.tar.gz
         asset_content_type: application/octet-stream
 
   # android:
