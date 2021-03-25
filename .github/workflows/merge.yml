@@ -87,6 +87,7 @@ jobs:
     #     npm install
     - name: Profiles before
       run: |
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         ls ~Library/MobileDevice/Provisioning\ Profiles
     - name: Setup provisioning profile
       run: |
