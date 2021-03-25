@@ -85,14 +85,12 @@ jobs:
     #   run: |
     #     gem install xcodeproj
     #     npm install
-    - name: Profiles before
-      run: |
-        ls "~/Library/MobileDevice/Provisioning\ Profiles"
     - name: Setup provisioning profile
       run: |
         echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
         base64 -d profile.b64 > profile.mobileprovision
         echo "profile_uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))" >> $GITHUB_ENV
+        echo ${{ env.profile_uuid }}
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         mv profile.mobileprovision "~/Library/MobileDevice/Provisioning\ Profiles/${{env.profile_uuid}}.mobileprovision"
     - name: Profiles after
