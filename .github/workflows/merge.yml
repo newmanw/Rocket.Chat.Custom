@@ -91,8 +91,7 @@ jobs:
         base64 -d profile.b64 > profile.mobileprovision
         echo "profile_uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))" >> $GITHUB_ENV
         echo ${{ env.profile_uuid }}
-        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        mv profile.mobileprovision "~/Library/MobileDevice/Provisioning\ Profiles/${{env.profile_uuid}}.mobileprovision"
+        mv profile.mobileprovision "${{env.profile_uuid}}.mobileprovision"
     - name: Profiles after
       run: |
         ls "~/Library/MobileDevice/Provisioning\ Profiles"
