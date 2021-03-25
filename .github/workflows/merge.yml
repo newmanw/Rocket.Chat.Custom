@@ -73,10 +73,9 @@ jobs:
         repository: RocketChat/Rocket.Chat.ReactNative
         path: 'Rocket.Chat.ReactNative.Repo'
         fetch-depth: 0
-    - name: TODO TEMP - Target old release
+    - name: Check single-server branch
       run: |
         git checkout single-server
-        git checkout e6d6b83b5d32b1bd4651281b2274b48585a24859
       working-directory: Rocket.Chat.ReactNative.Repo
     - name: Use Node.js
       uses: actions/setup-node@v1
@@ -84,6 +83,7 @@ jobs:
         node-version: '14.x'
     - name: Install Dependencies
       run: |
+        gem install xcodeproj
         npm install
     - name: merge styles
       run: |

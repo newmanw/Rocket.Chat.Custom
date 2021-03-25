@@ -8,7 +8,7 @@
   },
   "scripts": {
     "merge": "node merge.js",
-    "ios": "scripts/ios/plist.sh"
+    "ios": "scripts/ios/ios.sh"
   },
   "license": "MIT",
   "bugs": {

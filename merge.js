@@ -8,7 +8,7 @@ const appJsonPath = `${appPath}${path.sep}app.json`
 
 // TODO validate against gold copy
 const appJson = require(appJsonPath);
-appJson.server = 'https://rocketchat.geointservices.io';
+appJson.server = 'https://rocketchat.gs.mil';
 appJson.appGroup = 'group.mil.dod.nga.rocketchat';
 appJson.appStoreID = '9999';
 fs.writeFileSync(appJsonPath, JSON.stringify(appJson));

@@ -1,4 +1,6 @@
 #!/bin/bash
+ruby scripts/ios/add_google_plist.rb $1
+
 cd $1
 
 echo "Update RocketChatRN/Info.plist"
