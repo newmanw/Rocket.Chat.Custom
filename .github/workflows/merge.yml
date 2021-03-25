@@ -85,46 +85,58 @@ jobs:
       run: |
         gem install xcodeproj
         npm install
-    - name: merge styles
+    - name: Profiles before
       run: |
-        npm run merge ./Rocket.Chat.ReactNative.Repo
-    - name: Setup plist
+        ls $HOME/Library/MobileDevice/Provisioning Profiles
+    - name: Setup provisioning profile
       run: |
-        npm run ios ./Rocket.Chat.ReactNative.Repo
-    - name: Install Utilities
+        echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
+        base64 -d profile.b64 > profile.mobileprovision
+        echo ::set-output name=uuid::$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))
+        mv profile.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/${{UUID}}.mobileprovision"
+    - name: Profiles after
       run: |
-        brew install automake
-        brew install libtool
-    - name: Update Pod Repo
-      run: |
-        pod repo update
-    - name: React Native Bundle
-      run: |
-        yarn
-        npx pod-install
-      working-directory: Rocket.Chat.ReactNative.Repo
-    - name: Build
-      run: |
-        xcodebuild -workspace RocketChatRN.xcworkspace -scheme RocketChatRN -sdk iphoneos -configuration Release archive DEVELOPMENT_TEAM="N82SRQKGHU" PROVISIONING_PROFILE_SPECIFIER="RocketChat (Development)" PRODUCT_BUNDLE_IDENTIFIER="mil.dod.nga.rocketchat" CODE_SIGN_IDENTITY="Apple Development" -archivePath RocketChat.xcarchive archive
-      working-directory: Rocket.Chat.ReactNative.Repo/ios
-    - name: Show upload url
-      run: |
-        echo Upload URL
-        echo ${{ needs.release.outputs.release_upload_url }} 
-      working-directory: Rocket.Chat.ReactNative.Repo/ios
-    - name: Bundle Artifacts
-      run: |
-         tar -czvf RocketChat.xcarchive.tar.gz RocketChat.xcarchive/
-      working-directory: Rocket.Chat.ReactNative.Repo/ios/
-    - name: Upload Artifacts
-      uses: actions/upload-release-asset@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ needs.release.outputs.release_upload_url }} 
-        asset_path: Rocket.Chat.ReactNative.Repo/ios/RocketChat.xcarchive.tar.gz
-        asset_name: RocketChat.xcarchive.tar.gz
-        asset_content_type: application/octet-stream
+        ls $HOME/Library/MobileDevice/Provisioning Profiles
+    # - name: merge styles
+    #   run: |
+    #     npm run merge ./Rocket.Chat.ReactNative.Repo
+    # - name: Setup plist
+    #   run: |
+    #     npm run ios ./Rocket.Chat.ReactNative.Repo
+    # - name: Install Utilities
+    #   run: |
+    #     brew install automake
+    #     brew install libtool
+    # - name: Update Pod Repo
+    #   run: |
+    #     pod repo update
+    # - name: React Native Bundle
+    #   run: |
+    #     yarn
+    #     npx pod-install
+    #   working-directory: Rocket.Chat.ReactNative.Repo
+    # - name: Build
+    #   run: |
+    #     xcodebuild -workspace RocketChatRN.xcworkspace -scheme RocketChatRN -sdk iphoneos -configuration Release archive DEVELOPMENT_TEAM="N82SRQKGHU" PROVISIONING_PROFILE_SPECIFIER="RocketChat (Development)" PRODUCT_BUNDLE_IDENTIFIER="mil.dod.nga.rocketchat" CODE_SIGN_IDENTITY="Apple Development" -archivePath RocketChat.xcarchive archive
+    #   working-directory: Rocket.Chat.ReactNative.Repo/ios
+    # - name: Show upload url
+    #   run: |
+    #     echo Upload URL
+    #     echo ${{ needs.release.outputs.release_upload_url }} 
+    #   working-directory: Rocket.Chat.ReactNative.Repo/ios
+    # - name: Bundle Artifacts
+    #   run: |
+    #      tar -czvf RocketChat.xcarchive.tar.gz RocketChat.xcarchive/
+    #   working-directory: Rocket.Chat.ReactNative.Repo/ios/
+    # - name: Upload Artifacts
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ needs.release.outputs.release_upload_url }} 
+    #     asset_path: Rocket.Chat.ReactNative.Repo/ios/RocketChat.xcarchive.tar.gz
+    #     asset_name: RocketChat.xcarchive.tar.gz
+    #     asset_content_type: application/octet-stream
 
   # android:
   #   runs-on: ubuntu-latest
