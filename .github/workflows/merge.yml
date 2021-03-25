@@ -93,7 +93,7 @@ jobs:
         mv profile.mobileprovision "${profile_uuid}.mobileprovision"
     - name: Profiles after
       run: |
-        ls
+        ls -altr
     # - name: merge styles
     #   run: |
     #     npm run merge ./Rocket.Chat.ReactNative.Repo
