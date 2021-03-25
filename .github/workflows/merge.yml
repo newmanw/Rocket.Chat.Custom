@@ -77,17 +77,17 @@ jobs:
       run: |
         git checkout single-server
       working-directory: Rocket.Chat.ReactNative.Repo
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-    - name: Install Dependencies
-      run: |
-        gem install xcodeproj
-        npm install
+    # - name: Use Node.js
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: '14.x'
+    # - name: Install Dependencies
+    #   run: |
+    #     gem install xcodeproj
+    #     npm install
     - name: Profiles before
       run: |
-        ls $HOME/Library/MobileDevice/Provisioning Profiles
+        ls ~Library/MobileDevice/Provisioning Profiles
     - name: Setup provisioning profile
       run: |
         echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
