@@ -89,9 +89,11 @@ jobs:
       run: |
         echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
         base64 -d profile.b64 > profile.mobileprovision
-        echo "profile_uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))" >> $GITHUB_ENV
-        echo ${{ env.profile_uuid }}
-        mv profile.mobileprovision "${{env.profile_uuid}}.mobileprovision"
+        ls
+        echo ::set-output name=file::$(profile.mobileprovision)
+        echo ${{ steps.vars.outputs.version }}
+        uuid=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision)`
+        mv profile.mobileprovision "${uuid}.mobileprovision"
     - name: Profiles after
       run: |
         ls "~/Library/MobileDevice/Provisioning\ Profiles"
