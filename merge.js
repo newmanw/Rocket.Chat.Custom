@@ -8,35 +8,23 @@ const appJsonPath = `${appPath}${path.sep}app.json`
 
 // TODO validate against gold copy
 const appJson = require(appJsonPath);
-appJson.server = 'https://rocketchat.gs.mil';
-appJson.appGroup = 'mil.nga.comms';
+appJson.server = 'https://rocketchat.geointservices.io';
+appJson.appGroup = 'group.mil.dod.nga.rocketchat';
 appJson.appStoreID = '9999';
 fs.writeFileSync(appJsonPath, JSON.stringify(appJson));
 
 // colors.js
 // TODO validate against gold copy
 const colorsSrc = path.join('Rocket.Chat.ReactNative', 'app', 'constants', 'colors.js');
-const colorsDest = path.join(appPath, 'app', 'constants', 'color.js');
+const colorsDest = path.join(appPath, 'app', 'constants', 'colors.js');
 fs.copyFileSync(colorsSrc, colorsDest);
 
 // Android resources
-const resSrc = path.join('Rocket.Chat.ReactNative', 'android');
-const resDest = path.join(appPath, 'android');
-fs.copySync(resSrc, resDest);
+const androidSrc = path.join('Rocket.Chat.ReactNative', 'android');
+const androidDest = path.join(appPath, 'android');
+fs.copySync(androidSrc, androidDest);
 
-// iOS
-  // ios/RocketChatRN/Info.plist
-	// <key>CFBundleDisplayName</key>
-	// <string>Comms</string>
-  // /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName Comms" RocketChatRN/Info.plist
-
-  // ios/ShareRocketChatRN/Info.plist
-	// <key>CFBundleDisplayName</key>
-	// <string>Comms Extension</string>
-  // /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName Comms Extension" ShareRocketChatRN/Info.plist
-
-
-  // ios/NotificationService/Info.plist
-	// <key>CFBundleDisplayName</key>
-	// <string>Comms NotificationService</string>
-  // /usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName Comms NotificationService" NotificationService/Info.plist
+// iOS resources
+const iosSrc = path.join('Rocket.Chat.ReactNative', 'ios',);
+const iosDest = path.join(appPath, 'ios');
+fs.copySync(iosSrc, iosDest);
