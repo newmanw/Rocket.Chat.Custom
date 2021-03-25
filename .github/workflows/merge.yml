@@ -87,7 +87,7 @@ jobs:
     #     npm install
     - name: Profiles before
       run: |
-        ls ~Library/MobileDevice/Provisioning Profiles
+        ls ~Library/MobileDevice/Provisioning\ Profiles
     - name: Setup provisioning profile
       run: |
         echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
@@ -96,7 +96,7 @@ jobs:
         mv profile.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/${{env.profile_uuid}}.mobileprovision"
     - name: Profiles after
       run: |
-        ls $HOME/Library/MobileDevice/Provisioning Profiles
+        ls $HOME/Library/MobileDevice/Provisioning\ Profiles
     # - name: merge styles
     #   run: |
     #     npm run merge ./Rocket.Chat.ReactNative.Repo
