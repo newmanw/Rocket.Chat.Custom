@@ -93,8 +93,6 @@ jobs:
         mv profile.mobileprovision "${uuid}.mobileprovision"
     - name: Profiles after
       run: |
-        echo "~/Library/MobileDevice"
-        ls ~/Library/MobileDevice
         mkdir -p "~/Library/MobileDevice/Provisioning Profiles"
         cp *.mobileprovision "~/Library/MobileDevice/Provisioning Profiles"
         echo "~/Library/MobileDevice/Provisioning Profiles"
