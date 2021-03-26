@@ -115,10 +115,10 @@ jobs:
         echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
         base64 -d profile.b64 > profile.mobileprovision
         uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))
-        mkdir -p "~/Library/MobileDevice/Provisioning Profiles"
-        mv profile.mobileprovision "~/Library/MobileDevice/Provisioning Profiles/${uuid}.mobileprovision"
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        mv profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/${uuid}.mobileprovision"
         echo "Pre build check profiles"
-        ls "~/Library/MobileDevice/Provisioning Profiles"
+        ls ~/Library/MobileDevice/Provisioning\ Profiles
         xcodebuild -workspace RocketChatRN.xcworkspace -scheme RocketChatRN -sdk iphoneos -configuration Release archive DEVELOPMENT_TEAM="N82SRQKGHU" PROVISIONING_PROFILE_SPECIFIER="RocketChat (Development)" PRODUCT_BUNDLE_IDENTIFIER="mil.dod.nga.rocketchat" CODE_SIGN_IDENTITY="Apple Development" -archivePath RocketChat.xcarchive archive
       working-directory: Rocket.Chat.ReactNative.Repo/ios
     - name: Show upload url
