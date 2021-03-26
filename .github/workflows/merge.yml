@@ -93,8 +93,13 @@ jobs:
         mv profile.mobileprovision "${uuid}.mobileprovision"
     - name: Profiles after
       run: |
-        ls -altr
-        cp *.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles"
+        echo "~/Library/MobileDevice"
+        ls ~/Library/MobileDevice
+        mkdir -p "~/Library/MobileDevice/Provisioning Profiles"
+        cp *.mobileprovision "~/Library/MobileDevice/Provisioning Profiles"
+        echo "~/Library/MobileDevice/Provisioning Profiles"
+        ls "~/Library/MobileDevice/Provisioning Profiles"
+
     # - name: merge styles
     #   run: |
     #     npm run merge ./Rocket.Chat.ReactNative.Repo
