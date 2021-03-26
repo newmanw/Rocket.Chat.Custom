@@ -89,12 +89,12 @@ jobs:
       run: |
         echo "${{ secrets.PROVISIONING_PROFILE }}" > profile.b64
         base64 -d profile.b64 > profile.mobileprovision
-        echo "profile_uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))" >> $GITHUB_ENV
-        local_uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))
-        mv profile.mobileprovision "${local_uuid}.mobileprovision"
+        uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i profile.mobileprovision))
+        mv profile.mobileprovision "${uuid}.mobileprovision"
     - name: Profiles after
       run: |
         ls -altr
+        cp *.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles"
     # - name: merge styles
     #   run: |
     #     npm run merge ./Rocket.Chat.ReactNative.Repo
