@@ -62,7 +62,7 @@ jobs:
         echo ${{ steps.create_release.outputs.upload_url }}
 
   ios:
-   runs-on: macos-latest
+   runs-on: macos-11.0
    needs: release
 
    steps:
