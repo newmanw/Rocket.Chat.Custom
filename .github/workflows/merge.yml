@@ -174,24 +174,12 @@ jobs:
         wrapper-cache-enabled: true
         dependencies-cache-enabled: true
         configuration-cache-enabled: true
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-      with:
-          tag_name: ${{ needs.check.outputs.current_version }}
-          release_name: ${{ needs.check.outputs.current_version }}
-          body: |
-            RocketChat.ReactNative Version ${{ needs.check.outputs.current_version }}
-          draft: false
-          prerelease: false
     - name: Upload Artifacts
       uses: actions/upload-release-asset@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        upload_url: ${{ needs.release.outputs.release_upload_url }} 
         asset_path: Rocket.Chat.ReactNative.Repo/android/app/build/outputs/apk/officialFoss/release/app-official-foss-release.apk
         asset_name: app-official-foss-release.apk
         asset_content_type: application/octet-stream
