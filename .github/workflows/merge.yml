@@ -103,11 +103,12 @@ jobs:
         yarn
         npx pod-install
       working-directory: Rocket.Chat.ReactNative.Repo
-    - name: Configure Signing Certifcate and Provisioning Profiles
+    - name: Configure Signing Certificate and Provisioning Profiles
       run: |
-        echo "${{ secrets.CERTIFICATE }}" > development.b64
-        base64 -d development.b64 > development.p12
-      working-directory: Rocket.Chat.ReactNative.Repo/ios
+        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.CERTIFICATE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/development.p12 ./.github/secrets/development.p12.gpg
+        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN_Provision.mobileProvision ./.github/secrets/RocketChatRN_Provision.mobileProvision.gpg
+        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN_NotificationService.mobileProvision ./.github/secrets/RocketChatRN_NotificationService.mobileProvision.gpg
+        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN_ShareExtension.mobileProvision ./.github/secrets/RocketChatRN_ShareExtension.mobileProvision.gpg
     - name: Build
       env: 
         KEYCHAIN_NAME: "${{ secrets.KEYCHAIN_NAME }}"
@@ -123,15 +124,15 @@ jobs:
       working-directory: Rocket.Chat.ReactNative.Repo/ios
     - name: Bundle Artifacts
       run: |
-         tar -czvf RocketChat.xcarchive.tar.gz RocketChat.xcarchive/
-      working-directory: Rocket.Chat.ReactNative.Repo/ios/
+         tar -czvf RocketChat.xcarchive.tar.gz *.xcarchive/
+      working-directory: Rocket.Chat.ReactNative.Repo/ios/build
     - name: Upload Artifacts
       uses: actions/upload-release-asset@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.release.outputs.release_upload_url }} 
-        asset_path: Rocket.Chat.ReactNative.Repo/ios/RocketChat.xcarchive.tar.gz
+        asset_path: Rocket.Chat.ReactNative.Repo/ios/build/RocketChat.xcarchive.tar.gz
         asset_name: RocketChat.xcarchive.tar.gz
         asset_content_type: application/octet-stream
 
