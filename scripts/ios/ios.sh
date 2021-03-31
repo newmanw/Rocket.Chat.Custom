@@ -27,3 +27,15 @@ echo "Update RocketChatRN/RocketChatRN.entitlements"
 
 echo "Update RocketChatRN/RocketChatRN.entitlements"
 /usr/libexec/PlistBuddy -c "Set :com.apple.security.application-groups:0 group.mil.dod.nga.rocketchat" ios/NotificationService/NotificationService.entitlements
+
+sed -i '' \
+	's/PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.reactnative;/PRODUCT_BUNDLE_IDENTIFIER = mil.dod.nga.rocketchat;/' \
+	ios/RocketChatRN.xcodeproj/project.pbxproj
+
+sed -i '' \
+	's/PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.reactnative.ShareExtension;/PRODUCT_BUNDLE_IDENTIFIER = mil.dod.nga.rocketchat.ShareExtension;/' \
+	ios/RocketChatRN.xcodeproj/project.pbxproj
+
+sed -i '' \
+	's/PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.reactnative.NotificationService;/PRODUCT_BUNDLE_IDENTIFIER = mil.dod.nga.rocketchat.NotificationService;/' \
+	ios/RocketChatRN.xcodeproj/project.pbxproj
