@@ -106,7 +106,7 @@ jobs:
     - name: Configure Signing Certificate and Provisioning Profiles
       run: |
         gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.CERTIFICATE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/development.p12 ./.github/secrets/development.p12.gpg
-        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN_Provision.mobileProvision ./.github/secrets/RocketChatRN_Provision.mobileProvision.gpg
+        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN.mobileProvision ./.github/secrets/RocketChatRN.mobileProvision.gpg
         gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN_NotificationService.mobileProvision ./.github/secrets/RocketChatRN_NotificationService.mobileProvision.gpg
         gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.PROFILE_PASSPHRASE }}" --output Rocket.Chat.ReactNative.Repo/ios/RocketChatRN_ShareExtension.mobileProvision ./.github/secrets/RocketChatRN_ShareExtension.mobileProvision.gpg
     - name: Build
