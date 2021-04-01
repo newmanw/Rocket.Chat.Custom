@@ -185,7 +185,7 @@ jobs:
       with:
         wrapper-directory: Rocket.Chat.ReactNative.Repo/android
         build-root-directory: Rocket.Chat.ReactNative.Repo/android
-        arguments: assembleOfficialFossRelease
+        arguments: assembleOfficialPlayRelease
           -PAPPLICATION_ID=mil.dod.nga.rocketchat
           -PVERSIONCODE=${{steps.checkout.outputs.version_code}}
           -PKEYSTORE=../../release.keystore
