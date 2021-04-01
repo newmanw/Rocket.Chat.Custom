@@ -1,0 +1,118 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    create_keychain(	
+      name: ENV["KEYCHAIN_NAME"],	
+      password: ENV["KEYCHAIN_PASSWORD"],
+      default_keychain: true,
+      unlock: true,
+      timeout: false
+    )	
+  end
+
+ desc "Build Whitelabel app"
+  lane :build_whitelabel do
+
+    # get_certificates(
+    #   development: true,
+    #   username: ENV['CERTIFICATE_USERNAME']
+    # )
+
+    import_certificate(
+      certificate_path: "development.p12",
+      certificate_password: ENV["CERTIFICATE_PASSWORD"],
+      keychain_password: ENV["KEYCHAIN_PASSWORD"]
+    )
+
+    install_provisioning_profile(path: "RocketChatRN.mobileprovision")
+    install_provisioning_profile(path: "RocketChatRN_NotificationService.mobileprovision")
+    install_provisioning_profile(path: "RocketChatRN_ShareExtension.mobileprovision")
+
+    # get_provisioning_profile(
+    #   api_key: api_key,
+    #   app_identifier: "mil.dod.nga.rocketchat",
+    #   provisioning_name: "RocketChat (Development)",
+    #   filename: "RocketChatRN.mobileprovision"
+    # )
+
+    # get_provisioning_profile(
+    #   api_key: api_key,
+    #   app_identifier: "mil.dod.nga.rocketchat.NotificationService",
+    #   provisioning_name: "RocketChat Notification Service (Development)",
+    #   filename: "RocketChatRN_NotificationService.mobileprovision"
+    # )
+
+    # get_provisioning_profile(
+    #   api_key: api_key,
+    #   app_identifier: "mil.dod.nga.rocketchat.ShareExtension",
+    #   provisioning_name: "RocketChat Share Extension (Development)",
+    #   filename: "RocketChatRN_ShareExtension.mobileprovision"
+    # )
+
+    update_project_provisioning(
+      xcodeproj: 'RocketChatRN.xcodeproj',
+      profile: "RocketChatRN.mobileprovision",
+      target_filter: "RocketChatRN",
+      build_configuration: 'Release',
+      code_signing_identity: 'Apple Development'
+    )
+
+    update_project_provisioning(
+      xcodeproj: 'RocketChatRN.xcodeproj',
+      profile: "RocketChatRN_NotificationService.mobileprovision",
+      target_filter: "NotificationService",
+      build_configuration: 'Release',
+      code_signing_identity: 'Apple Development'
+    )
+
+    update_project_provisioning(
+      xcodeproj: 'RocketChatRN.xcodeproj',
+      profile: "RocketChatRN_ShareExtension.mobileprovision",
+      target_filter: "ShareRocketChatRN",
+      build_configuration: 'Release',
+      code_signing_identity: 'Apple Development'
+    )
+
+    gym(
+      scheme: "RocketChatRN",
+      workspace: "RocketChatRN.xcworkspace",
+      output_name: "Rocket.Chat",
+      output_directory: "build",
+      build_path: "build",
+      xcargs: "DEVELOPMENT_TEAM=N82SRQKGHU",
+      export_method: "development",
+      export_team_id: "N82SRQKGHU",
+      export_options: {
+        provisioningProfiles: { 
+          "mil.dod.nga.rocketchat" => "RocketChat (Development)",
+          "mil.dod.nga.rocketchat.NotificationService" => "RocketChat Notification Service (Development)",
+          "mil.dod.nga.rocketchat.ShareExtension" => "RocketChat Share Extension (Development)",
+        }
+      }
+    )
+  end
+
+  after_all do |lane|
+    delete_keychain(name: ENV["KEYCHAIN_NAME"])	
+  end	
+
+  error do |lane, exception|
+    delete_keychain(name: ENV["KEYCHAIN_NAME"])	
+  end
+end
