@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "376774619170",
+    "project_id": "rocketchat-78cc3",
+    "storage_bucket": "rocketchat-78cc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376774619170:android:b983858248b51158795a7b",
+        "android_client_info": {
+          "package_name": "mil.dod.nga.rocketchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376774619170-b39r51vqou007ia9at3p6o2tgl0iacbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ_et7gCG2UwVLmWJcqEefda0HwyX6xvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376774619170-b39r51vqou007ia9at3p6o2tgl0iacbd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "376774619170-f44pd08lb0gca79uj8tpq4u06fgv9bbm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mil.dod.nga.rocketchat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
