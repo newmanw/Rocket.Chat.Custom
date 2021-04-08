@@ -2,7 +2,7 @@
   "name": "RocketChatRN",
   "share": "ShareRocketChatRN",
   "displayName": "RocketChatRN",
-  "server": "https://chat.dso.test.xc.nga.mil/",
+  "server": "https://chat.dso.test.xc.nga.mil",
   "appGroup": "group.mil.dod.nga.rocketchat",
   "appStoreID": "0"
 }
